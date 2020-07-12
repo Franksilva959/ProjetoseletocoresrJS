@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Seletor</title>
+    <style>
+        #quadrado {
+            width: 150px;
+            height: 150px;
+            background: rgb(0, 0, 0);
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="titulo">
+        <h1>Projeto Seletor de imagem JS </h1>
+        <ol>
+            <li><strong>HTML:</strong>Página;</li>
+            <li><strong>CSS:</strong> Cores RGB;</li>
+            <li><strong>JS:</strong> Alteração das cores do CSS, usando onchange();</li>
+        </ol>
+        <br>
+    </div>
+    <div id="principal">
+        <label for="r">R:</label>
+        <input type="range" id="r" name="r" min="0" max="255" onchange="change()" value="0">
+        <input type="number" id="r_disabled" disabled value="0"><br>
+        <label for="g">G:</label>
+        <input type="range" id="g" name="g" min="0" max="255" onchange="change()" value="0">
+        <input type="number" id="g_disabled" disabled value="0"><br>
+        <label for="b">B:</label>
+        <input type="range" id="b" name="b" min="0" max="255" onchange="change()" value="0">
+        <input type="number" id="b_disabled" disabled value="0"><br><br>
+
+        <label for="rgb">RGB:</label>
+        <input type="text" id="rgb" name="rgb" disabled value="rgb(0, 0, 0)">
+        <div id="quadrado"></div>
+    </div>
+
+
+    <script>
+        window.addEventListener('load', change);
+        window.addEventListener('load', change_border());
+
+        function change_border() {
+            document.querySelector('#quadrado')
+                .style
+                .border = 'solid 4px rgb(' +
+                Math.floor(Math.random() * 255) +
+                ',' +
+                Math.floor(Math.random() * 255) +
+                ',' +
+                Math.floor(Math.random() * 255) +
+                ')';
+        }
+
+        function change() {
+
+            change_border();
+
+            var r = document.querySelector('#r');
+            var g = document.querySelector('#g');
+            var b = document.querySelector('#b');
+
+            var rgb = document.querySelector('#rgb');
+
+            document.querySelector('#r_disabled').value = r.value;
+            document.querySelector('#g_disabled').value = g.value;
+            document.querySelector('#b_disabled').value = b.value;
+
+            document.querySelector('#quadrado')
+                .style
+                .background = 'rgb(' + r.value + ', ' + g.value + ', ' + b.value + ')';
+
+            rgb.value = 'rgb(' + r.value + ', ' + g.value + ', ' + b.value + ')';
+
+        }
+    </script>
+</body>
+
+</html>
